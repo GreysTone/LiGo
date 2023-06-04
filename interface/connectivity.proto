@@ -1,0 +1,62 @@
+// connectivity.proto
+syntax = "proto3";
+import "common.proto";
+
+package ligo;
+
+service Connectivity {
+  rpc Ping (PingRequest) returns (PingReply) {}
+  rpc ListNodeResources (PingRequest) returns (ResourcesReply) {}
+
+  rpc ListConfigs (PingRequest) returns (ConfigList) {}
+  rpc UpdateConfig (Config) returns (ResultReply) {}
+
+  rpc CreateWork (Work) returns (ResultReply) {}
+  rpc DeleteWork (Work) returns (ResultReply) {}
+  rpc ListAllWorks (PingRequest) returns (WorkList) {}
+  rpc InspectWork (Work) returns (Work) {}
+  rpc EnableWork (Work) returns (ResultReply) {}
+  rpc DisableWork (Work) returns (ResultReply) {}
+  rpc RunWork (Work) returns (ResultReply) {}
+  rpc StopWork (Work) returns (ResultReply) {}
+}
+
+message PingReply {
+  string version = 1;
+}
+
+message ResourcesReply {
+  string cpu = 1;
+  string mem = 2;
+  string gpu = 3;
+  string dsk = 4;
+}
+
+message Config {
+  string key = 1;
+  string val = 2;
+}
+
+message ConfigList {
+  repeated Config conf = 1;
+}
+
+message Work {
+  string whash = 1;
+  string wtype = 2;
+  uint32 status = 3;
+  uint32 persist = 4;
+  string configs = 5;
+  WorkLink link = 6;
+  // repeated WorkLink links = 6;
+}
+
+message WorkLink {
+  string bid = 1;
+  string outlet = 2;
+  // repeated string outlets = 2;
+}
+
+message WorkList {
+  repeated Work works = 1;
+}

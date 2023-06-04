@@ -1,0 +1,7 @@
+Package: ligo
+Version: REPLACE_VERSION
+Pre-Depends: python3-pip, python3-dev, python3-setuptools, libjpeg8, libjpeg62-dev, python3-opencv
+Maintainer: songdanyang <arthur.r.song@gmail.com>
+Description: LiGo
+Homepage: http://github.com/GreysTone/LiGo
+Architecture: REPLACE_ARCH

@@ -1,0 +1,51 @@
+# Python
+*.egg-info
+*.egg
+*.pyc
+.cache
+.eggs
+build
+dist
+
+# Translations
+*.mo
+
+# Testing
+.tox
+
+# Vagrant
+.vagrant
+.bash_history
+
+html
+
+.docker_env
+
+.env
+.pytest_cache/
+.vscode/
+.idea/
+__pycache__/
+.local_deploy/
+.flake8
+http/
+
+# Compile & Release
+build/
+release-pack/
+deb/
+src/serving/interface
+ligo/interface
+srcs.txt
+*.so
+*.c
+*.swp
+*_pb2.py
+*_pb2_grpc.py
+*.deb
+*.tar.gz
+*.pem
+model
+model_core
+model_dore
+.history

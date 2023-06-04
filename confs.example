@@ -1,0 +1,31 @@
+backend:
+  preheat: replace_with_preheat_image
+  storage: replace_with_storage
+ext:
+  backend: {}
+  gates: {}
+  outlet: {}
+  plugins: {}
+  work: {}
+lmt:
+  max_backend_count: 1
+  max_batchsize: 1000
+  max_compute_process: 2
+sys:
+  debug:
+    detailed: 0
+    enabled: 0
+    profiler: 0
+  grpc_port: '[::]:50051'
+  restful_port: '5000'
+work: {}
+simple:
+  batchsize: 1
+  btype:
+  cpcount: 1
+  mcode:
+  mhash:
+  mpvtk:
+  outlets:
+  - configs: '{}'
+    otype: sync

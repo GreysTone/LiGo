@@ -1,0 +1,22 @@
+// inference.proto
+syntax = "proto3";
+import "common.proto";
+
+package ligo;
+
+service Inference {
+  rpc InferenceLocal (InferRequest) returns (ResultReply) {}
+  rpc InferenceRemote (InferRequest) returns (ResultReply) {}
+}
+
+message InferRequest {
+  string bid = 1;
+  string uuid = 2;
+  string outlet = 3;
+
+  string path = 4;
+  bytes data = 5;
+  string extra = 6;
+  uint32 dtype = 7;
+}
+

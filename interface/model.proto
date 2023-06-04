@@ -1,0 +1,47 @@
+// model.proto
+syntax = "proto3";
+import "common.proto";
+
+package ligo;
+
+service ModelService {
+
+  rpc CreateModel (Model) returns (ResultReply) {}
+  rpc DeleteModel (Model) returns (ResultReply) {}
+  rpc ListAllModels (PingRequest) returns (ModelList) {}
+  rpc InspectModel (Model) returns (Model) {}
+  rpc EnableModel (Model) returns (ResultReply) {}   // not impl
+  rpc DisableModel (Model) returns (ResultReply) {}  // not impl
+  rpc RunModel (Model) returns (ResultReply) {}  // not impl
+  rpc StopModel (Model) returns (ResultReply) {} // not impl
+
+  rpc UpdateModelConfigs (Model) returns (ResultReply) {}
+  rpc UpdateModelConfigsFromURI (Model) returns (ResultReply) {}
+
+  rpc ImportModelFromLocal (Model) returns (ResultReply) {}
+  rpc ImportModelFromURI (Model) returns (ResultReply) {}
+  rpc ExportModelToLocal (Model) returns (ResultReply) {}
+
+  rpc EncryptedModel (Model) returns (ResultReply) {}   // not impl
+  rpc DecryptedModel (Model) returns (ResultReply) {}   // not impl
+}
+
+
+message Model {
+  string mhash = 1;
+  string bundle = 2;
+
+  repeated string labels = 3;
+  string head = 4;
+  string bone = 5;
+  string impl = 6;
+  string version = 7;
+  string disthash = 8;
+  repeated string threshold = 9;
+  repeated string mapping = 10;
+  string modelext = 12;
+}
+
+message ModelList {
+  repeated Model models = 1;
+}

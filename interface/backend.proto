@@ -1,0 +1,115 @@
+// backend.proto
+syntax = "proto3";
+import "common.proto";
+import "model.proto";
+
+package trueno;
+
+service BackendService {
+  rpc ListSupportedType (PingRequest) returns (SupportedReply) {}
+
+  rpc CreateBackend (Backend) returns (ResultReply) {}
+  rpc DeleteBackend (Backend) returns (ResultReply) {}
+  rpc ListAllBackends (PingRequest) returns (BackendList) {}
+  rpc InspectBackend (Backend) returns (Backend) {}
+  rpc EnableBackend (Backend) returns (ResultReply) {}
+  rpc DisableBackend (Backend) returns (ResultReply) {}
+  rpc RunModelOnBackend (Backend) returns (ResultReply) {}
+  rpc StopModelOnBackend (Backend) returns (ResultReply) {}
+
+  rpc AppendOutlet (Outlet) returns (ResultReply) {}
+  rpc ListOutlets (Outlet) returns (OutletList) {}
+  rpc RemoveOutlet (Outlet) returns (ResultReply) {}
+
+  rpc CreateAndLoadModel (FullLoadRequest) returns (ResultReply) {}
+
+  // rpc ListRunningBackends (PingRequest) returns (BackendList) {}
+  // rpc ListBackend (BackendInfo) returns (BackendStatus) {}
+  // rpc ReloadModelOnBackend (LoadRequest) returns (ResultReply) {}
+  // rpc InitializeBackend (BackendInfo) returns (ResultReply) {}
+  // rpc TerminateBackend (BackendInfo) returns (ResultReply) {}
+}
+
+message SupportedReply {
+  string support = 1;
+}
+
+message Outlet {
+  string otype = 2;
+  string key = 3;
+  string configs = 4;
+}
+
+message OutletList {
+  repeated Outlet outlets = 1;
+}
+
+message Backend {
+  string bhash = 1;
+  string btype = 2;
+  string mhash = 3;
+  string mcode = 4;
+  string mpvtk = 5;
+  string storage = 6;
+  string preheat = 7;
+  uint32 batchsize = 8;
+  uint32 cpcount = 9;
+  repeated Outlet outlets = 10;
+  string configs = 11;
+
+  uint32 persist = 12;
+  repeated uint32 cpstatus = 13;
+}
+
+// message BackendListTy {
+//   repeated BackendTy backends = 1;
+// }
+
+// message BackendInfo {
+//   string bid = 1;
+//   string impl = 2;
+//   string storage = 3;
+//   string preheat = 4;
+//   uint32 batchsize = 5;
+//   uint32 inferprocnum = 6;
+//   string exporter = 7;
+//   string backendext = 8;
+// }
+
+// message BackendStatus {
+//   BackendInfo configs = 1;
+//   repeated uint32 pstatus = 2;
+//   ModelInfo model = 3;
+// }
+
+message BackendList {
+  repeated Backend backends = 1;
+}
+
+// message OutletInfo {
+//   string bid = 1;
+//   string key = 2;
+//   string type = 3;
+//   string configs = 4;
+// }
+
+// message OutletStatus {
+//   repeated string outlets = 1;
+// }
+
+message LoadRequest {
+  string bid = 1;
+  Model model = 2;
+  uint32 encrypted = 3;
+  string a64key = 4;
+  string pvtkey = 5;
+}
+
+message FullLoadRequest {
+  Backend backend = 1;
+  Model model = 2;
+  repeated Outlet outlets = 3;
+  uint32 encrypted = 4;
+  string a64key = 5;
+  string pvtkey = 6;
+}
